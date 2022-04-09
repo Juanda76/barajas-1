@@ -21,7 +21,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import modelo.estadoHab;
-// @author Software_Max(JDV)
+// @author Software_Max(JDV)mmnb
 
 public final class FrmEstadoHabit_J extends javax.swing.JFrame {
 

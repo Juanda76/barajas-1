@@ -29,7 +29,7 @@ import modelo.reservas_J;
 import rsscalelabel.RSScaleLabel;
 import static consultas.consUsuario_M.nom;
 import controlador.ctrlEstadoHabit_J;
-import modelo.estadoHabit;
+import modelo.estadoHab;
 import modelo.tours_J;
 
 // @author Software_Max(JDV)
@@ -640,8 +640,8 @@ public final class FrmMenuAdmin_J extends javax.swing.JFrame {
     private void btnEstadoHabitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEstadoHabitActionPerformed
         consEstadoHabit_J consEstHab = new consEstadoHabit_J();
         FrmEstadoHabit_J frmEstHab = new FrmEstadoHabit_J();
-        estadoHabit modEstHab = new estadoHabit();
-        ctrlEstadoHabit_J ctrEstHab = new ctrlEstadoHabit_J(consEstHab, frmEstHab,modEstHab);
+        estadoHab modEstHab = new estadoHab();
+        ctrlEstadoHabit_J ctrlEstHab = new ctrlEstadoHabit_J(consEstHab, frmEstHab,modEstHab);
         frmEstHab.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnEstadoHabitActionPerformed

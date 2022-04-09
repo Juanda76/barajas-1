@@ -34,8 +34,7 @@ import static alertas.InfVerFrmEstHab.resInfo;
 import consultas.consEstadoHabit_J;
 import static controlador.ctrlPagosPend_J.mensajeINFOEstHab;
 import java.util.Date;
-import javax.swing.JOptionPane;
-import modelo.estadoHabit;
+import modelo.estadoHab;
 import vistas.FrmEstadoHabit_J;
 
 public class ctrlReservas_J implements MouseListener, KeyListener {
@@ -146,7 +145,7 @@ public class ctrlReservas_J implements MouseListener, KeyListener {
 
                             consEstadoHabit_J consEstHab = new consEstadoHabit_J();
                             FrmEstadoHabit_J frmEstHab = new FrmEstadoHabit_J();
-                            estadoHabit modEstHab = new estadoHabit();
+                            estadoHab modEstHab = new estadoHab();
                             ctrlEstadoHabit_J ctrlEstHab = new ctrlEstadoHabit_J(consEstHab, frmEstHab, modEstHab);
                             frmEstHab.setVisible(true);
                             frmResv.dispose();

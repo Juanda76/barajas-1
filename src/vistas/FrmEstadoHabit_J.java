@@ -20,7 +20,7 @@ import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import modelo.estadoHabit;
+import modelo.estadoHab;
 // @author Software_Max(JDV)
 
 public final class FrmEstadoHabit_J extends javax.swing.JFrame {
@@ -28,12 +28,13 @@ public final class FrmEstadoHabit_J extends javax.swing.JFrame {
     Frame JInternalFrame = null;
     consEstadoHabit_J consEstHab = new consEstadoHabit_J();
     SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
-    estadoHabit modEstaHab = new estadoHabit();
     public static int dys;
+     String fecAct;
 
     public FrmEstadoHabit_J() {
 
         initComponents();
+       fecAct=lblFecAct.getText();
         valCantHabOcup();
         valCantHabDisp();
         valCantHabReserv();
@@ -60,7 +61,7 @@ public final class FrmEstadoHabit_J extends javax.swing.JFrame {
         lblHola = new javax.swing.JLabel();
         lblNomUser = new javax.swing.JLabel();
         lblFecha = new javax.swing.JLabel();
-        lblFecAct = new javax.swing.JLabel();
+        lblFecAct = new javax.swing.JTextField();
         pnlHabitaciones = new javax.swing.JPanel();
         marcoP1 = new javax.swing.JPanel();
         puertaHBT1 = new javax.swing.JPanel();
@@ -299,8 +300,8 @@ public final class FrmEstadoHabit_J extends javax.swing.JFrame {
         lblFecha.setText("FECHA COMPLETA");
         pnlDatos1.add(lblFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 80, 270, -1));
 
-        lblFecAct.setText("jLabel1");
-        pnlDatos1.add(lblFecAct, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 10, -1, -1));
+        lblFecAct.setText("jTextField1");
+        pnlDatos1.add(lblFecAct, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 10, -1, -1));
 
         pnlHabitaciones.setBackground(new java.awt.Color(255, 255, 255));
         pnlHabitaciones.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(255, 255, 255)));
@@ -1338,7 +1339,7 @@ public final class FrmEstadoHabit_J extends javax.swing.JFrame {
 
         consEstadoHabit_J consEstHab = new consEstadoHabit_J();
         FrmEstadoHabit_J frmEstHab = new FrmEstadoHabit_J();
-        estadoHabit modEstHab = new estadoHabit();
+        estadoHab modEstHab = new estadoHab();
         ctrlEstadoHabit_J ctrlEstHab = new ctrlEstadoHabit_J(consEstHab, frmEstHab, modEstHab);
         frmEstHab.setVisible(true);
 
@@ -1348,9 +1349,8 @@ public final class FrmEstadoHabit_J extends javax.swing.JFrame {
 //*************************************************************************************************************************
     public void usarEstadoHab(String numHab, JPanel puertaNum, JLabel Lresp, JLabel Lacomp, JLabel respRes, JLabel acompRes, JButton btnVerHabNum, JButton btnIrChekinNum) {
 
-        String est;
-        consEstHab.verEstadoPHabt(numHab);
-        est = modEstaHab.getEstado();
+        String est = consEstHab.verEstadoAux(numHab);
+
         switch (est) {
             case "DISPONIBLE":
                 puertaNum.setBackground(new Color(0, 204, 0));
@@ -1476,17 +1476,17 @@ public final class FrmEstadoHabit_J extends javax.swing.JFrame {
 //******************************************** VALIDAR NUMERO HUESPEDES  ****************************************************************
 
     public int diasRestReserva(String est, String numHab) {
-
-        Date fechaDelSistema = new Date();
-
-        lblFecAct.setText(formatoFecha.format(fechaDelSistema));
+        Date sistFecha = new Date();
+        SimpleDateFormat formato = new SimpleDateFormat("YYYY-MM-dd");
+       String fecAct1 = (formato.format(sistFecha));
         String ingA = consEstHab.fechaHabAmarilla("RESERVA", numHab);
 
         String fecha1 = (ingA);
-        String fecha2 = lblFecAct.getText();
-
+        String fecha2 = (fecAct1);
+        
         Date f1 = setearFechas(fecha1);
         Date f2 = setearFechas(fecha2);
+        
 
         int dias = consEstHab.numeroDiasParaReserva(f2, f1);
         return dias;
@@ -1519,9 +1519,7 @@ public final class FrmEstadoHabit_J extends javax.swing.JFrame {
         lblNomUser.setText(nom);
         lblLocalizacion.setText(ht.getMunicipio());
         lblFecha.setText(consHotel_J.fechaActual().toUpperCase());
-        Date sistFecha = new Date();
-        SimpleDateFormat formato = new SimpleDateFormat("YYYY-MM-dd");
-        lblFecAct.setText(formato.format(sistFecha));
+        
         lblFecAct.setVisible(false);
 
         RSScaleLabel.setScaleLabel(lblCara, "src/img/hotel.png");
@@ -1603,7 +1601,7 @@ public final class FrmEstadoHabit_J extends javax.swing.JFrame {
     public javax.swing.JLabel lblA8;
     public javax.swing.JLabel lblA9;
     public javax.swing.JLabel lblCara;
-    public javax.swing.JLabel lblFecAct;
+    public javax.swing.JTextField lblFecAct;
     public javax.swing.JLabel lblFecha;
     public javax.swing.JLabel lblHola;
     public javax.swing.JLabel lblLocalizacion;

@@ -29,7 +29,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JOptionPane;
-import modelo.estadoHabit;
 
 // @author Software_Max(JDV)
 public final class FrmAInfoHabit_J extends javax.swing.JDialog {
@@ -41,7 +40,6 @@ public final class FrmAInfoHabit_J extends javax.swing.JDialog {
     consEstadoHabit_J consEstHab = new consEstadoHabit_J();
     FrmEstadoHabit_J frmEstHab = new FrmEstadoHabit_J();
     SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
-    estadoHabit modEstHab = new estadoHabit();
     Frame JInternalFrame;
     PreparedStatement ps;
     ResultSet rs;
@@ -564,9 +562,8 @@ public final class FrmAInfoHabit_J extends javax.swing.JDialog {
 //*********************************************************************************************************************************************
     public void verInfoEstado(String numHab) {
 
-        String resEst;
-                consEstHab.verEstadoPHabt(numHab);
-                resEst = modEstHab.getEstado();
+        String resEst = consEstHab.verEstadoPpal(numHab);
+        
         if (resEst.equals("OCUPADO")) {
             mostrarDatosHabitacionR(resEst, numHab);
 

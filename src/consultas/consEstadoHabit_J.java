@@ -11,7 +11,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import modelo.estadoHabit;
+import modelo.estadoHab;
 
 public class consEstadoHabit_J {
 
@@ -24,16 +24,14 @@ public class consEstadoHabit_J {
     ResultSet rs;
     String llegada;
     recursividad rec = new recursividad();
-    estadoHabit est = new estadoHabit();
+    estadoHab modEstHab = new estadoHab();
 
 //***************************************************************************************************************
-    public void verEstadoPHabt(String num) {
-
-        
+    public String verEstadoPpal(String num) {
 
         conectar conn = new conectar();
         Connection con = conn.getConnection();
-
+        
         String sql = "SELECT estado FROM habitaciones WHERE numero = '" + num + "'";
 
         try {
@@ -43,15 +41,13 @@ public class consEstadoHabit_J {
 
             if (rs.next()) {
 
-                est.setEstado(rs.getString("estado"));
-                
-                
+              String  p = rs.getString("estado");
+              return p;
             }
-            
-        } catch (SQLException ex) {
-            
-            System.out.println(ex.getMessage());
+           
 
+        } catch (SQLException ex) {
+            Logger.getLogger(consEstadoHabit_J.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
 
             try {
@@ -65,18 +61,18 @@ public class consEstadoHabit_J {
 
             }
         }
-        
+        return null;
+
     }
 
 //***************************************************************************************************************
-    public String verEstadoPpalHabit(String num) {
+    public String verEstadoAux(String num) {
 
-        String estado = null;
-
+        
         conectar conn = new conectar();
         Connection con = conn.getConnection();
 
-        String sql = "SELECT estado FROM habitaciones WHERE numero = '" + num + "'";
+        String sql = "SELECT est_aux FROM habitaciones WHERE numero = '" + num + "'";
 
         try {
 
@@ -85,9 +81,8 @@ public class consEstadoHabit_J {
 
             if (rs.next()) {
 
-                estado = rs.getString("estado");
-
-                return estado;
+              String a =  rs.getString("est_aux");
+                return a;
             }
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
@@ -108,11 +103,9 @@ public class consEstadoHabit_J {
         return null;
     }
 
-
 //****************************************** METODO CALCULAR DIAS ***************************************************************  
-    
     public int numeroDiasParaReserva(Date fecha1, Date fecha2) {
-        
+
         long startTime = fecha1.getTime();
         long endTime = fecha2.getTime();
         long diffTime = endTime - startTime;
@@ -120,7 +113,6 @@ public class consEstadoHabit_J {
         return (int) diffDays;
     }
 
-        
 //****************************************************************************************************************************    
     public int cantEstados(String estado) {
 
@@ -330,9 +322,9 @@ public class consEstadoHabit_J {
             rs = ps.executeQuery();
 
             if (rs.next()) {
-              
+
                 ingA = rs.getString("llegada");
-               
+
                 return ingA;
             }
 
@@ -392,10 +384,8 @@ public class consEstadoHabit_J {
         return numHuespedes = 0;
 
     }
-    
-    
+
 //************************************** METODO MOSTRAR DATOS HABITACION ***********************************************************
-   
     public int mostrarDiasParaReserva(String estad, String numPu, String fec) {
 
         if (fechaLlegaReserva(estad, numPu)) {
@@ -408,10 +398,9 @@ public class consEstadoHabit_J {
             int diasRestantes = (numeroDiasEntreDosFechas(f2, f1));
             return diasRestantes;
         }
-        return 0;
+        return -1;
     }
- 
-    
+
 //****************************************************************************************************************************    
     public boolean fechaLlegaReserva(String est, String num) {
 
@@ -449,7 +438,6 @@ public class consEstadoHabit_J {
     }
 
 //*************************************************************************************
-
     public static int numeroDiasEntreDosFechas(Date fecha1, Date fecha2) {
 
         long startTime = fecha1.getTime();
@@ -474,5 +462,4 @@ public class consEstadoHabit_J {
 //        return fechaSetDate;
 //
 //    }    
-
 }
